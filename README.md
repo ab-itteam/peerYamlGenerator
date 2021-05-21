@@ -1,5 +1,5 @@
 # peerYamlGenerator
-Generates peer yaml file for hyperledger fabric.
+Generates peer yaml file for hyperledger fabric V2.2.
 
 use it like:
 node peerYamlGenerator.js -d domain -c 1 -u nick
