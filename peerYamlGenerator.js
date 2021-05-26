@@ -5,6 +5,7 @@ const fs   = require('fs');
 //argument parsing
 const argv = yargs.argv
 const name = argv.u;
+const nameCapital = name.charAt(0).toUpperCase() + name.slice(1) + "MSP";
 const domain = argv.d;
 const userCount = parseInt(argv.c);
 
@@ -72,6 +73,23 @@ delete docPeer.services[`peer0.variable`];
 //no adaptations needed in couchdb
 let couchdb = yaml.load(fs.readFileSync(`${location}/docker-compose-couch-variable.yaml`, 'utf8'));
 
+//configtx for hyperledger
+let configtx = yaml.load(fs.readFileSync(`${location}/configtx-variable.yaml`, 'utf8'));
+console.log(configtx)
+configtx.Organizations[0];
+console.log(configtx)
+
+configtx.Organizations[0].Name = nameCapital;
+configtx.Organizations[0].ID = nameCapital;
+configtx.Organizations[0].MSPDir = configtx[`../organizations/peerOrganizations/${fqdn}/msp`];
+
+configtx.Organizations[0].Policies.Readers.Rule = `OR('${nameCapital}.admin', '${nameCapital}.peer', '${nameCapital}.client')`;
+configtx.Organizations[0].Policies.Readers.Writers = `OR('${nameCapital}.admin','${nameCapital}.client')`;
+configtx.Organizations[0].Policies.Readers.Admins = `OR('${nameCapital}.admin')`;
+configtx.Organizations[0].Policies.Readers.Endorsement = `OR('${nameCapital}.peer')`;
+
+
+
 
 //make sure the output dir exists
 fs.mkdirSync(`${output}/docker`, { recursive: true });
@@ -81,5 +99,6 @@ Promise.all([
 fs.writeFileSync(`${output}/docker/docker-compose-couch-new.yaml`, yaml.dump(couchdb)),
 fs.writeFileSync(`${output}/docker/docker-compose-orgpeer-new.yaml`, yaml.dump(docPeer)),
 fs.writeFileSync(`${output}/docker/docker-compose-ca-new.yaml`, yaml.dump(docCa)),
+fs.writeFileSync(`${output}/configtx.yaml`, yaml.dump(configtx)),
 fs.writeFileSync(`${output}/newPeer.yaml`, yaml.dump(doc))
 ]).then(() => console.log("done")).catch((e) => console.error(e));
