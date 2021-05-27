@@ -5,6 +5,8 @@ INstall:
 npm i -g peer-yaml-generator
 
 use it like:
-node peerYamlGenerator.js -d domain -c 1 -u nick
+peer-yaml-generator -d domain -c 1 -u nick
 
-where -d is the org domain, -c is the usercount and -u the orgname
+where -d is the org domain, -c is the usercount and -u the username.
+
+all the files will go in a new folder "generated" which is made in the location you run the program
