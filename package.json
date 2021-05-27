@@ -1,7 +1,13 @@
 {
+  "name": "peer-yaml-generator",
+  "description": "Generate all hyperledger fabric yml files for adding new organization/peers",
+  "version": "0.0.2",
   "dependencies": {
     "js-yaml": "^4.1.0",
     "js-yaml-js-types": "^1.0.0",
     "yargs": "^17.0.1"
+  },
+  "bin" : {
+    "peer-yaml-generator" : "./peerYamlGenerator.js"
   }
 }

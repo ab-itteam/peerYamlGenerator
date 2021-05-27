@@ -1,3 +1,5 @@
+#!/usr/bin/env node
+
 const yaml = require('js-yaml');
 const yargs = require('yargs');
 const fs   = require('fs');
