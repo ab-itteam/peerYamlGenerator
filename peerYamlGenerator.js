@@ -86,10 +86,11 @@ configtx.Organizations[0].Name = nameCapital;
 configtx.Organizations[0].ID = nameCapital;
 configtx.Organizations[0].MSPDir = `../organizations/peerOrganizations/${fqdn}/msp`;
 
-configtx.Organizations[0].Policies.Readers.Rule = `"OR('${nameCapital}.admin', '${nameCapital}.peer', '${nameCapital}.client')"`;
-configtx.Organizations[0].Policies.Writers.Rule = `"OR('${nameCapital}.admin','${nameCapital}.client')"`;
+//due to bug in yaml package we cant parse with "" around the strings, luckly hyperledger can parse the rules like this
+configtx.Organizations[0].Policies.Readers.Rule = `OR('${nameCapital}.admin', '${nameCapital}.peer', '${nameCapital}.client')`;
+configtx.Organizations[0].Policies.Writers.Rule = `OR('${nameCapital}.admin','${nameCapital}.client')`;
 configtx.Organizations[0].Policies.Admins.Rule = `OR('${nameCapital}.admin')`;
-configtx.Organizations[0].Policies.Endorsement.Rule = "\"" + `OR('${nameCapital}.peer')` + "\"";
+configtx.Organizations[0].Policies.Endorsement.Rule = `OR('${nameCapital}.peer')`;
 
 
 
