@@ -34,7 +34,6 @@ services:
       - CORE_PEER_CHAINCODELISTENADDRESS=0.0.0.0:11052
     volumes:
       - /var/run/docker.sock:/host/var/run/docker.sock
-      - peer0.org3.example.com:/var/hyperledger/production
     working_dir: /opt/gopath/src/github.com/hyperledger/fabric/peer
     command: peer node start
     ports:

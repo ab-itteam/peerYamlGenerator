@@ -58,7 +58,6 @@ docPeer.services[fqdn].container_name = `${fqdn}`;
 console.log(docPeer);
 docPeer.services[fqdn].environment.push(`CORE_PEER_ID=${fqdn}`);
 docPeer.services[fqdn].environment.push(`CORE_PEER_ADDRESS=${fqdn}:11051`);
-docPeer.services[fqdn].environment.push(`CORE_PEER_ADDRESS=${fqdn}:11051`);
 docPeer.services[fqdn].environment.push(`CORE_PEER_CHAINCODEADDRESS=${fqdn}:11052`);
 docPeer.services[fqdn].environment.push(`CORE_PEER_CHAINCODEADDRESS=${fqdn}:11052`);
 docPeer.services[fqdn].environment.push(`CORE_PEER_GOSSIP_BOOTSTRAP=${fqdn}:11051`);
@@ -78,9 +77,9 @@ let couchdb = yaml.load(fs.readFileSync(`${location}/docker-compose-couch-variab
 
 //configtx for hyperledger
 let configtx = yaml.load(fs.readFileSync(`${location}/configtx-variable.yaml`, 'utf8'));
-console.log(configtx)
+
 configtx.Organizations[0];
-console.log(configtx)
+
 
 configtx.Organizations[0].Name = nameCapital;
 configtx.Organizations[0].ID = nameCapital;
