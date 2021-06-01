@@ -30,7 +30,8 @@ console.log(name);
 //the crypto Yaml file
 let doc = yaml.load(fs.readFileSync(`${location}/variable-crypto.yaml`, 'utf8'));
 doc.PeerOrgs[0].Name = name;
-doc.PeerOrgs[0].Domain = domain;
+//yes not only domain,also name...
+doc.PeerOrgs[0].Domain = `${name}.${domain}`;
 doc.PeerOrgs[0].Users.Count =  userCount;
 
 //the docker CA yaml file
