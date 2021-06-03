@@ -61,11 +61,11 @@ docPeer.services[fqdn].environment.push(`CORE_PEER_ADDRESS=${fqdn}:11051`);
 docPeer.services[fqdn].environment.push(`CORE_PEER_CHAINCODEADDRESS=${fqdn}:11052`);
 docPeer.services[fqdn].environment.push(`CORE_PEER_GOSSIP_BOOTSTRAP=${fqdn}:11051`);
 docPeer.services[fqdn].environment.push(`CORE_PEER_GOSSIP_EXTERNALENDPOINT=${fqdn}:11051`);
-docPeer.services[fqdn].environment.push(`CORE_PEER_LOCALMSPID=${name}MSP`);
+docPeer.services[fqdn].environment.push(`CORE_PEER_LOCALMSPID=${nameCapital}`);
 
 
 docPeer.services[fqdn].volumes.push(`../../organizations/peerOrganizations/${name}.${domain}/peers/${fqdn}/msp:/etc/hyperledger/fabric/msp`);
-docPeer.services[fqdn].volumes.push(`../../organizations/peerOrganizations/${name}.${domain}/peers/${fqdn}/msp:/etc/hyperledger/fabric/tls`);
+docPeer.services[fqdn].volumes.push(`../../organizations/peerOrganizations/${name}.${domain}/peers/${fqdn}/tls:/etc/hyperledger/fabric/tls`);
 docPeer.services[fqdn].volumes.push(`${fqdn}:/var/hyperledger/production`);
 
 delete docPeer.services[`peer0.variable`];
