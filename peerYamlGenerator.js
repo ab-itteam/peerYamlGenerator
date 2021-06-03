@@ -59,7 +59,6 @@ console.log(docPeer);
 docPeer.services[fqdn].environment.push(`CORE_PEER_ID=${fqdn}`);
 docPeer.services[fqdn].environment.push(`CORE_PEER_ADDRESS=${fqdn}:11051`);
 docPeer.services[fqdn].environment.push(`CORE_PEER_CHAINCODEADDRESS=${fqdn}:11052`);
-docPeer.services[fqdn].environment.push(`CORE_PEER_CHAINCODEADDRESS=${fqdn}:11052`);
 docPeer.services[fqdn].environment.push(`CORE_PEER_GOSSIP_BOOTSTRAP=${fqdn}:11051`);
 docPeer.services[fqdn].environment.push(`CORE_PEER_GOSSIP_EXTERNALENDPOINT=${fqdn}:11051`);
 docPeer.services[fqdn].environment.push(`CORE_PEER_LOCALMSPID=${name}MSP`);
