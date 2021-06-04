@@ -10,6 +10,7 @@ const name = argv.u;
 const nameCapital = name.charAt(0).toUpperCase() + name.slice(1) + "MSP";
 const domain = argv.d;
 const userCount = parseInt(argv.c);
+const port = argv.p ? parseInt(argv.p) : 11051;
 
 
 //read templates from current location
@@ -57,11 +58,14 @@ docPeer.services[fqdn].container_name = `${fqdn}`;
 
 console.log(docPeer);
 docPeer.services[fqdn].environment.push(`CORE_PEER_ID=${fqdn}`);
-docPeer.services[fqdn].environment.push(`CORE_PEER_ADDRESS=${fqdn}:11051`);
-docPeer.services[fqdn].environment.push(`CORE_PEER_CHAINCODEADDRESS=${fqdn}:11052`);
-docPeer.services[fqdn].environment.push(`CORE_PEER_GOSSIP_BOOTSTRAP=${fqdn}:11051`);
-docPeer.services[fqdn].environment.push(`CORE_PEER_GOSSIP_EXTERNALENDPOINT=${fqdn}:11051`);
+docPeer.services[fqdn].environment.push(`CORE_PEER_ADDRESS=${fqdn}:${port}`);
+docPeer.services[fqdn].environment.push(`CORE_PEER_CHAINCODEADDRESS=${fqdn}:${port+1}`);
+docPeer.services[fqdn].environment.push(`CORE_PEER_GOSSIP_BOOTSTRAP=${fqdn}:${port}`);
+docPeer.services[fqdn].environment.push(`CORE_PEER_GOSSIP_EXTERNALENDPOINT=${fqdn}:${port}`);
 docPeer.services[fqdn].environment.push(`CORE_PEER_LOCALMSPID=${nameCapital}`);
+docPeer.services[fqdn].environment.push(`CORE_PEER_LISTENADDRESS=0.0.0.0:${port}`);
+docPeer.services[fqdn].environment.push(`CORE_PEER_CHAINCODELISTENADDRESS=0.0.0.0:${port+1}`);
+
 
 
 docPeer.services[fqdn].volumes.push(`../../organizations/peerOrganizations/${name}.${domain}/peers/${fqdn}/msp:/etc/hyperledger/fabric/msp`);
